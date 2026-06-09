@@ -1,0 +1,41 @@
+# PropShield default configuration.
+# Credentials and the live/demo toggle come from environment variables / .env,
+# NOT from this file (see .env.example).
+
+# Index instruments to scout. Symbol names are resolved against the broker's
+# instrument list at runtime, so minor naming differences are tolerated.
+watchlist:
+  - US30
+  - NAS100
+  - SPX500
+  - GER40
+  - UK100
+  - JP225
+  - US2000
+  - FRA40
+
+# Starting balance for the offline paper broker.
+paper_balance: 100000.0
+
+strategy:
+  resolution: "1H"        # one of: 1M,1W,1D,4H,1H,30m,15m,5m,1m
+  lookback_period: "1M"   # how much history to pull per instrument
+  ema_fast: 21
+  ema_slow: 50
+  ema_trend: 200
+  rsi_period: 14
+  atr_period: 14
+  breakout_period: 20
+  bb_period: 20
+  min_score: 60.0         # minimum conviction (0..100) to consider tradable
+
+risk:
+  default_level: medium
+  presets:
+    low: 0.005            # 0.5% of equity risked per trade
+    medium: 0.01          # 1.0%
+    high: 0.02            # 2.0%
+  atr_stop_mult: 2.0      # stop distance = atr_stop_mult * ATR
+  reward_risk_ratio: 2.0  # take-profit distance = R:R * stop distance
+  max_open_positions: 3
+  max_risk_pct: 0.05      # hard cap regardless of preset

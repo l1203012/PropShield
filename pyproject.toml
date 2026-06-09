@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "propshield"
+version = "0.1.0"
+description = "Terminal indices trading bot for the TradeLocker platform"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+trading = ["tradelocker>=0.50"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+propshield = "propshield.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["propshield*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
